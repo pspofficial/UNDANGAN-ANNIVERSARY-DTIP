@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Undangan Anniversary 1st Komunitas Mobil - D'TIP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Russo+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-body: #121212;
+            --carbon: #1a1a1a;
+            --chrome: #e0e0e0;
+            --racing-red: #ff1a1a;
+            --gold: #ffb703;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+        
+        html, body { 
+            background-color: var(--bg-body); 
+            color: var(--chrome); 
+            text-align: center; 
+            overflow-x: hidden;
+            width: 100%;
+        }
+        
+        /* ── COVER SCREEN ── */
+        .cover-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #1c1c1c 0%, #050505 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .cover-screen.hide {
+            transform: translateY(-100%);
+            pointer-events: none;
+        }
+        .cover-title {
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            text-shadow: 0 0 10px rgba(255, 26, 26, 0.5);
+        }
+        .cover-subtitle {
+            font-size: 0.8rem;
+            color: #888;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+        .btn-open {
+            background: linear-gradient(135deg, var(--racing-red), #b30000);
+            color: #fff;
+            border: none;
+            padding: 16px 32px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 26, 26, 0.4);
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ── MAIN CONTAINER FULL SCREEN ── */
+        .container {
+            width: 100%;
+            margin: 0 auto; 
+            background: var(--bg-body);
+            min-height: 100vh; 
+            padding-bottom: 40px;
+        }
+
+        /* ── GRID SYSTEM (MOBILE OPTIMIZED) ── */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            padding: 16px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ── SLIDE BOX ── */
+        .slide-box {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            filter: blur(4px);
+            transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+            background: var(--carbon);
+            border-radius: 12px;
+            padding: 24px 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            border: 1px solid #252525;
+            width: 100%;
+        }
+
+        .slide-box.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        /* LOGO & HEADER */
+        .logo-box { 
+            width: 60px;         
+            height: 60px;       
+            border: none; 
+            border-radius: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 1; 
+            margin: 0 auto 10px auto;        
+        }
+
+        .logo-box img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            border-radius: 0; 
+        }
+
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(18,18,18,1)), url('banner.jpeg') center/cover;
+            color: white; padding: 60px 16px 40px; border-bottom: 3px solid var(--racing-red);
+            width: 100%;
+        }
+        .tagline { background: var(--racing-red); display: inline-block; padding: 6px 14px; font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; transform: skew(-15deg); margin-bottom: 15px; }
+        h1 { font-family: 'Russo One', sans-serif; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 1px; line-height: 1.2; }
+        h2 { font-family: 'Russo One', sans-serif; font-size: 1.2rem; margin-bottom: 15px; color: white; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        h2 i { color: var(--racing-red); }
+
+        /* DEKORASI KOTAK KONTEN */
+        .theme-box { background: #111; padding: 14px; border-radius: 6px; border-left: 4px solid var(--gold); margin: 15px 0; font-weight: 700; font-size: 0.95rem; }
+        .dresscode-box { background: linear-gradient(145deg, #250000, #151515); border: 2px solid var(--racing-red); padding: 16px; border-radius: 8px; margin: 15px 0; }
+        .dc-title { color: var(--racing-red); font-weight: 900; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
+        .dc-item { font-size: 0.95rem; margin-top: 8px; color: #fff; font-weight: 600; }
+
+        .agenda-card { background: #111; padding: 16px; border-radius: 8px; border: 1px solid #333; margin: 15px 0; text-align: left; }
+        .agenda-item { display: flex; gap: 15px; margin-bottom: 12px; align-items: flex-start; }
+        .agenda-time { font-family: 'Russo One', sans-serif; color: var(--gold); font-size: 0.85rem; min-width: 75px; }
+        .agenda-desc { font-size: 0.85rem; color: #ccc; }
+
+        /* COUNTDOWN */
+        .countdown { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
+        .cd-item { background: #000; border: 1px solid #333; color: var(--gold); padding: 10px 4px; border-radius: 6px; min-width: 68px; font-size: 0.7rem; font-weight: 700; }
+        .cd-item span { display: block; font-family: 'Russo One', sans-serif; font-size: 1.4rem; color: #fff; margin-bottom: 2px; }
+        
+        .alarm-card { background: #111; border: 1px dashed #333; padding: 16px; border-radius: 8px; margin-top: 20px; text-align: center; }
+        .btn-alarm { background: #1e1e1e; border: 2px solid var(--gold); color: #fff; font-weight: 700; font-size: 0.8rem; padding: 10px 16px; border-radius: 6px; margin-top: 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; justify-content: center; text-transform: uppercase; transition: 0.3s; }
+        .btn-alarm:hover { background: var(--gold); color: #000; }
+
+        /* MAPS & GALERI */
+        .map-box { border-radius: 8px; overflow: hidden; margin-top: 15px; height: 250px; border: 1px solid #333; }
+        .map-box iframe { width: 100%; height: 100%; border: 0; filter: invert(90%) hue-rotate(180deg); }
+        
+        /* GALERI 31 FOTO WITH SCROLLBAR */
+        .gallery { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 10px; 
+            margin-top: 15px; 
+            max-height: 480px; 
+            overflow-y: auto; 
+            padding-right: 4px; 
+        }
+        .gallery::-webkit-scrollbar {
+            width: 6px;
+        }
+        .gallery::-webkit-scrollbar-thumb {
+            background: var(--racing-red);
+            border-radius: 4px;
+        }
+        .gallery::-webkit-scrollbar-track {
+            background: #111;
+        }
+        .gallery img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; border: 1px solid #333; }
+
+        /* PIC */
+        .pic-container { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .pic-card { background: #111; border: 1px solid #252525; border-left: 4px solid var(--racing-red); padding: 12px 16px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; text-align: left; }
+        .pic-role { font-size: 0.72rem; font-weight: 800; color: #888; text-transform: uppercase; }
+        .pic-name { font-size: 0.9rem; font-weight: bold; color: #fff; }
+
+        /* FORM */
+        .form-grp { margin-bottom: 12px; text-align: left; }
+        label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.8rem; color: #aaa; }
+        input, select { width: 100%; padding: 12px; background: #0a0a0a; border: 1px solid #333; color: #fff; border-radius: 6px; font-weight: 600; font-size: 0.85rem; }
+        .btn { background: var(--racing-red); color: white; padding: 14px; border: none; border-radius: 6px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; width: 100%; cursor: pointer; margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.95rem; }
+
+        /* ── FOOTER & THANKS SECTION ── */
+        .thanks-box {
+            margin-top: 20px;
+            background: linear-gradient(180deg, var(--carbon), #0a0a0a);
+            border: 1px solid #252525;
+            padding: 30px 20px;
+            border-radius: 12px;
+        }
+        .thanks-box p { font-size: 0.9rem; color: #bbb; line-height: 1.6; }
+        
+        /* PROMOTION BRANDING */
+        .branding-footer {
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #222;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        .brand-logo {
+            width: auto; 
+            height: 50px; 
+            background: none; 
+            border-radius: 0; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 5px auto;
+        }
+        .brand-text { font-size: 0.75rem; color: #666; letter-spacing: 1px; }
+        .brand-text strong { color: #aaa; }
+        .btn-order {
+            background: #25d366; color: #fff;
+            padding: 8px 16px; border-radius: 20px;
+            font-size: 0.75rem; font-weight: 700;
+            text-decoration: none; display: inline-flex;
+            align-items: center; gap: 6px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            transition: 0.3s;
+        }
+
+        /* UTILITIES FLOATING CONTROLS */
+        .music-btn { position: fixed; bottom: 20px; right: 20px; background: var(--racing-red); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 0 15px var(--racing-red); z-index: 9999; font-size: 0.9rem; }
+        .scroll-btn { position: fixed; bottom: 20px; right: 75px; background: #222; color: var(--gold); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid var(--gold); z-index: 9999; font-size: 0.9rem; }
+        .spin { animation: putar 2s linear infinite; }
+        @keyframes putar { 100% { transform: rotate(360deg); } }
+
+        /* RESPONSIVITAS PC / DESKTOP */
+        @media (min-width: 768px) {
+            .content-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 20px; }
+            .gallery { grid-template-columns: repeat(3, 1fr); max-height: 520px; }
+            .gallery img { height: 140px; }
+            h1 { font-size: 3rem; }
+            h2 { font-size: 1.3rem; }
+            .slide-box { padding: 35px 25px; }
+            .thanks-box { grid-column: span 2; }
+        }
+
+        @media (min-width: 1200px) {
+            .content-grid { grid-template-columns: repeat(3, 1fr); }
+            .thanks-box { grid-column: span 3; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="coverScreen" class="cover-screen">
+        <div class="logo-box">
+            <img src="logo dtip.png" alt="Logo D'TIP">
+        </div>
+        <h2 class="cover-title">DULUR TIMOR PASUNDAN</h2>
+        <p class="cover-subtitle">Undangan 1st Anniversary Celebration</p>
+        <button class="btn-open" onclick="bukaUndangan()">
+            <i class="fas fa-envelope-open-text"></i> Buka Undangan
+        </button>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="WhatsApp Audio 2026-01-17 at 14.44.52.mpeg" type="audio/mpeg">
+    </audio>
+
+    <div class="scroll-btn" onclick="toggleAutoScroll()" id="scrollIcon"><i class="fas fa-angles-down"></i></div>
+    <div class="music-btn" onclick="toggleMusic()" id="musicIcon"><i class="fas fa-compact-disc"></i></div>
+
+    <div class="container">
+        <header>
+            <div class="logo-box">
+                <img src="logo dtip.png" alt="Logo D'TIP">
+            </div>
+            <div class="tagline">DULUR TIMOR PASUNDAN</div>
+            <h1>1st Anniversary Celebration</h1>
+            <p style="font-size: 0.85rem; color: #bbb; margin-top: 8px; letter-spacing: 1px;">DUDUK SAMA RATA • BERDIRI TANPA RAJA</p>
+        </header>
+
+        <div class="content-grid">
+
+            <div class="slide-box">
+                <h2><i class="fas fa-birthday-cake"></i> TENTANG ACARA</h2>
+                <div class="theme-box">"Satu Tahun Bersama, Solidaritas Tanpa Batas"</div>
+                <p style="font-size: 0.85rem; color: #ccc; line-height: 1.6; text-align: left;">Merayakan sejarah perjalanan 1 tahun komunitas mobil D'TIP ( dulur timor pasundan ). Mengundang seluruh rekan-rekan member dan lintas Chapter/Komunitas untuk merayakan kebersamaan penuh kekeluargaan ini.</p>
+                <div class="dresscode-box" style="margin-top: 15px;">
+                    <div class="dc-title"><i class="fas fa-tshirt"></i> Dresscode Resmi</div>
+                    <div class="dc-item">Kemeja / Kaos Club / Komunitas Masing-Masing</div>
+                </div>
+            </div>
+
+            <div class="slide-box">
+                <h2><i class="fas fa-calendar-alt"></i> WAKTU & LOKASI</h2>
+                <div class="winner-card" style="background: linear-gradient(135deg, #241700, #151515); padding: 20px; border-radius: 8px; border: 1px solid var(--gold); margin: 5px 0 15px 0;">
+                    <p style="font-size: 0.85rem; color: var(--gold); font-weight: bold;">HARI / TANGGAL :</p>
+                    <p style="font-size: 1rem; color: #fff; font-weight: 800; margin-top: 4px;">SABTU, 29 AGUSTUS 2026</p>
+                    <p style="font-size: 0.85rem; color: #ccc; margin-top: 6px;">Pukul 20.00 WIB s.d. Selesai</p>
+                </div>
+                <p style="font-size: 0.85rem; margin-bottom: 8px; text-align: left;"><strong>Lokasi Utama:</strong><br>Villa CITRA Cisaat Sukabumi</p>
+            </div>
+
+            <div class="slide-box">
+                <h2><i class="fas fa-stopwatch"></i> Countdown Acara</h2>
+                <p style="font-weight: 800; color: var(--racing-red); margin-bottom: 10px; font-size: 0.9rem;">MENUJU PUNCAK ANNIVERSARY</p>
+                
+                <div class="countdown">
+                    <div class="cd-item"><span id="days">00</span>HARI</div>
+                    <div class="cd-item"><span id="hours">00</span>JAM</div>
+                    <div class="cd-item"><span id="minutes">00</span>MNT</div>
+                    <div class="cd-item"><span id="seconds">00</span>DTK</div>
+                </div>
+
+                <div class="alarm-card">
+                    <i class="fas fa-bell" style="color: var(--gold);"></i>
+                    <p style="font-size: 0.8rem; font-weight: bold; margin-top: 5px; color: #fff;">Jangan Sampai Ketinggalan Momennya!</p>
+                    <button class="btn-alarm" onclick="setAlarmKalender()">
+                        <i class="fas fa-calendar-plus"></i> Pasang Pengingat Kalender
+                    </button>
+                </div>
+            </div>
+
+            <div class="slide-box">
+                <h2><i class="fas fa-list-ul"></i> Susunan Acara</h2>
+                <div class="agenda-card">
+                    <div class="agenda-item">
+                        <div class="agenda-time">19.00 - 20.00</div>
+                        <div class="agenda-desc">Registrasi Ulang, Pengondisian Parkir Konvoi & Ramah Tamah</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-time">20.00 - 20.30</div>
+                        <div class="agenda-desc">Opening, Pembacaan Doa & Sambutan Ketua Umum</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-time">20.30 - 21.30</div>
+                        <div class="agenda-desc">Seremoni Potong Tumpeng 1st Anniversary & Doorprize</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-time">21.30 - End</div>
+                        <div class="agenda-desc">Hiburan, Diskusi Komunitas, Sesi Foto Bersama & Penutupan</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-box">
+                <h2><i class="fas fa-route"></i> Lokasi Maps</h2>
+                <p style="font-size: 0.85rem; margin-bottom: 8px;">Akses Peta Menuju Lokasi Villa CITRA:</p>
+                <div class="map-box">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.2025682099083!2d106.91443699999999!3d-6.866312499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68363d7caf01ad%3A0xaf9d012f8f4937b8!2sVilla%20CITRA!5e0!3m2!1sid!2sid!4v1787585329577!5m2!1sid!2sid" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                </div>
+            </div>
+
+            <div class="slide-box">
+                <h2><i class="fas fa-camera"></i> Galeri Komunitas</h2>
+                <p style="font-size: 0.75rem; color: #888; margin-bottom: 10px;">Gulir untuk melihat foto kebersamaan</p>
+                <div class="gallery">
+                    <img src="WhatsApp Image 2026-06-26 at 20.51.51.jpeg" alt="Car 1">
+                    <img src="WhatsApp Image 2026-06-26 at 20.51.49.jpeg" alt="Car 2">
+                    <img src="WhatsApp Image 2026-06-26 at 20.51.50 (1).jpeg" alt="Car 3">
+                    <img src="WhatsApp Image 2026-06-26 at 20.51.43.jpeg" alt="Car 4">
+                    <img src="001.jpeg" alt="Car 5">
+                    <img src="002.jpeg" alt="Car 6">
+                    <img src="003.jpeg" alt="Car 7">
+                    <img src="004.jpeg" alt="Car 8">
+                    <img src="005.jpeg" alt="Car 9">
+                    <img src="006.jpeg" alt="Car 10">
+                    <img src="007.jpeg" alt="Car 11">
+                    <img src="008.jpeg" alt="Car 12">
+                    <img src="009.jpeg" alt="Car 13">
+                    <img src="010.jpeg" alt="Car 14">
+                    <img src="011.jpeg" alt="Car 15">
+                    <img src="012.jpeg" alt="Car 16">
+                    <img src="013.jpeg" alt="Car 17">
+                    <img src="014.jpeg" alt="Car 18">
+                    <img src="015.jpeg" alt="Car 19">
+                    <img src="016.jpeg" alt="Car 20">
+                    <img src="017.jpeg" alt="Car 21">
+                    <img src="018.jpeg" alt="Car 22">
+                    <img src="019.jpeg" alt="Car 23">
+                    <img src="020.jpeg" alt="Car 24">
+                    <img src="021.jpeg" alt="Car 25">
+                    <img src="022.jpeg" alt="Car 26">
+                    <img src="023.jpeg" alt="Car 27">
+                    <img src="024.jpeg" alt="Car 28">
+                    <img src="025.jpeg" alt="Car 29">
+                    <img src="026.jpeg" alt="Car 30">
+                    <img src="027.jpeg" alt="Car 31">
+                </div>
+            </div>
+
+            <div class="slide-box">
+                <h2><i class="fas fa-user-shield"></i> Penanggung Jawab</h2>
+                <div class="pic-container">
+                    <div class="pic-card">
+                        <div class="pic-role">Ketua Umum</div>
+                        <div class="pic-name">SYARIF.H</div>
+                    </div>
+                    <div class="pic-card">
+                        <div class="pic-role">Sekretaris Umum</div>
+                        <div class="pic-name">ADE DAMHUDI</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-box">
+                <h2><i class="fas fa-clipboard-check"></i> Konfirmasi Kehadiran (RSVP)</h2>
+                <form onsubmit="kirimWA(event)">
+                    <div class="form-grp">
+                        <label>Nama / Nopol Mobil</label>
+                        <input type="text" id="nama" placeholder="Cth: Dimas - B 1234 OK" required>
+                    </div>
+                    <div class="form-grp">
+                        <label>Status Kehadiran</label>
+                        <select id="hadir">
+                            <option value="Hadir Bawa Mobil">Hadir (Bawa Mobil Sendiri)</option>
+                            <option value="Hadir Nebeng">Hadir (Nebeng Member Lain)</option>
+                            <option value="Absen Berhalangan">Absen / Tidak Bisa Hadir</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn"><i class="fab fa-whatsapp"></i> Konfirmasi ke WhatsApp</button>
+                </form>
+            </div>
+
+            <div class="slide-box thanks-box">
+                <h2 style="color: var(--gold);"><i class="fas fa-heart"></i> TERIMA KASIH</h2>
+                <p>Kehadiran, dukungan, serta doa dari rekan-rekan sekalian adalah fondasi utama bagi kejayaan dan kekompakan komunitas kita ke depannya.</p>
+                <p style="margin-top: 10px; font-weight: bold; color: #fff;">Sampai jumpa di lokasi acara, utamakan keselamatan berkendara di jalan!</p>
+                <p style="font-size: 0.8rem; margin-top: 15px; color: var(--racing-red); font-weight: 800;">DUDUK SAMA RATA • BERDIRI TANPA RAJA</p>
+                
+                <div class="branding-footer">
+                    <div class="brand-logo">
+                        <img src="logopsp.png" alt="Logo Kreator" style="height: 100%; width: auto; object-fit: contain;">
+                    </div>
+                    <div class="brand-text">
+                        Undangan Digital dibuat oleh: <br><strong>PARTNER SOLUTION PRINTING</strong>
+                    </div>
+                    <a href="https://wa.me/6285782622827?text=Halo,%20saya%20tertarik%20untuk%20membuat%20undangan%20digital%20seperti%20DTIP" target="_blank" class="btn-order">
+                        <i class="fab fa-whatsapp"></i> Mau Buat Undangan seperti ini? Klik disini
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function bukaUndangan() {
+            document.getElementById("coverScreen").classList.add("hide");
+            if(!main) { toggleMusic(); }
+            if(!isScrolling) { startAutoScroll(); }
+        }
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.05
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.slide-box').forEach(box => {
+            observer.observe(box);
+        });
+
+        // Countdown System
+        const target = new Date("August 29, 2026 20:00:00").getTime();
+        setInterval(() => {
+            const sekarang = new Date().getTime();
+            const selisih = target - sekarang;
+            if (selisih > 0) {
+                document.getElementById("days").innerText = String(Math.floor(selisih / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                document.getElementById("hours").innerText = String(Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                document.getElementById("minutes").innerText = String(Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                document.getElementById("seconds").innerText = String(Math.floor((selisih % (1000 * 60)) / 1000)).padStart(2, '0');
+            }
+        }, 1000);
+
+        function setAlarmKalender() {
+            const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=1st+Anniversary+Komunitas+DTIP&dates=20260815T120000Z/20260815T160000Z&details=Acara+Puncak+Anniversary+1st+DTIP&location=Villa+CITRA&sf=true&output=xml`;
+            window.open(googleCalendarUrl, '_blank');
+        }
+
+        // Music System
+        const audio = document.getElementById("bg-music");
+        const icon = document.getElementById("musicIcon");
+        let main = false;
+
+        function toggleMusic() {
+            if (main) {
+                audio.pause();
+                icon.classList.remove("spin");
+                icon.innerHTML = '<i class="fas fa-compact-disc"></i>';
+            } else {
+                audio.play().catch(err => console.log("Blocked"));
+                icon.classList.add("spin");
+                icon.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            main = !main;
+        }
+
+        // Auto Scroll System
+        let scrollInterval;
+        let isScrolling = false;
+
+        function startAutoScroll() {
+            const scrollIcon = document.getElementById("scrollIcon");
+            scrollInterval = setInterval(() => {
+                window.scrollBy(0, 1);
+                if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 2) {
+                    stopAutoScroll();
+                }
+            }, 25);
+            
+            scrollIcon.innerHTML = '<i class="fas fa-pause"></i>';
+            scrollIcon.style.background = "var(--racing-red)";
+            isScrolling = true;
+        }
+
+        function stopAutoScroll() {
+            clearInterval(scrollInterval);
+            const scrollIcon = document.getElementById("scrollIcon");
+            scrollIcon.innerHTML = '<i class="fas fa-angles-down"></i>';
+            scrollIcon.style.background = "#222";
+            isScrolling = false;
+        }
+
+        function toggleAutoScroll() {
+            if (isScrolling) {
+                stopAutoScroll();
+            } else {
+                startAutoScroll();
+            }
+        }
+
+        function kirimWA(e) {
+            e.preventDefault();
+            const nm = document.getElementById("nama").value;
+            const hdr = document.getElementById("hadir").value;
+            const teks = `Konfirmasi RSVP Anniversary:\n• Nama/Nopol: *${nm}*\n• Status: *${hdr}*`;
+            window.open(`https://api.whatsapp.com/send?phone=6285210003338&text=${encodeURIComponent(teks)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
